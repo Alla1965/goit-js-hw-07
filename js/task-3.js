@@ -1,32 +1,37 @@
-class StringBuilder {
-  #value; 
+const inputBox = document.querySelector("#name-input");
+const outputBox = document.querySelector("#name-output");
 
-  constructor(initialValue) {
-    this.#value = initialValue; 
-  }
+const title = document.querySelector("h1");
+title.classList.add("title-h1");
 
-  getValue() {
-    return this.#value; 
-  }
+// Create new div
+const newContainer = document.createElement("div");
 
-  padEnd(str) {
-    this.#value += str; 
-  }
+// add class to  new div
+newContainer.classList.add("new-container");
 
-  padStart(str) {
-    this.#value = str + this.#value; 
-  }
+// replace elements into div
+inputBox.parentElement.replaceChild(newContainer, inputBox);
+newContainer.appendChild(inputBox);
+title.parentElement.replaceChild(newContainer, title);
+newContainer.appendChild(title);
 
-  padBoth(str) {
-    this.padStart(str); 
-    this.padEnd(str);   
-  }
-}
-const builder = new StringBuilder(".");
-console.log(builder.getValue()); // "."
-builder.padStart("^");
-console.log(builder.getValue()); // "^."
-builder.padEnd("^");
-console.log(builder.getValue()); // "^.^"
-builder.padBoth("=");
-console.log(builder.getValue()); // "=^.^="
+// styles for div
+newContainer.style.width = "408px";
+newContainer.style.height = "136px";
+newContainer.style.gap = "16px";
+newContainer.style.background = "#fff";
+
+// styles for title
+title.style.fontWeight = "600";
+title.style.fontSize = "24px";
+title.style.lineHeight = "1.33333";
+title.style.letterSpacing = "0.04em";
+title.style.color = "#2e2f42";
+title.style.marginLeft = "24px";
+title.style.marginTop = "0px";
+
+inputBox.addEventListener("input", event => {
+	const trimmedValue = event.currentTarget.value.trim();
+	outputBox.textContent = trimmedValue === "" ? "Anonymous" : trimmedValue;
+});
